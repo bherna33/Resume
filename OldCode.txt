@@ -1,0 +1,33 @@
+from pylatex.base_classes import CommandBase, Arguments
+from pylatex.package import Package
+
+class topinfo(CommandBase):
+    _latex_name = 'topinfo'
+    packages = [Package('color')]
+    print("test")
+
+
+
+#code for header    
+    # header = PageStyle("header")
+    # # Create left header
+    # with header.create(Head("L")):
+    #     header.append(Command("phone","(123) 456-7890"))
+    #     header.append(LineBreak())
+    #     header.append("location")
+    #     header.append(LineBreak())
+    #     header.append("email")
+    # # Create center header
+    # with header.create(Head("C")):
+    #     header.append(Command("Large","Name"))
+    #     header.append(LineBreak())
+    #     header.append("Position")
+        
+    # # Create right header    
+    # with header.create(Head("R")):
+    #     header.append("Linkedin")
+    #     header.append(LineBreak())
+    #     header.append("website")
+
+    # doc.preamble.append(header)
+    # doc.change_document_style("header")
