@@ -63,7 +63,7 @@ def commands(doc):
     #set set family default
     doc.append(UnsafeCommand('renewcommand', r"\familydefault", extra_arguments="\sfdefault"))
     
-    # git hub
+    # github
     github = UnsafeCommand('newcommand', r'\github', extra_arguments=r"\textcolor{rgb:red,110;green,84;blue,148}{\faGithubSquare}")
     doc.append(github)
     
