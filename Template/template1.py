@@ -97,9 +97,9 @@ def packages(doc):
 
 
 #header
-def header(doc, Username):
+def header(doc, Username, loc):
    doc.append(name(arguments=Arguments(Username)))
-   doc.append(location(arguments="location, Location"))
+   doc.append(location(arguments=loc))
    doc.append(contactInfo(arguments=Command("href","mailto:email@domain", extra_arguments=("youremail@email.com",
                                                                                            " (123) 456-7890 ", 
                                                                                            Command("href","https://www.linkedin.com/in/branden-hernandez-688365165/", 
@@ -108,48 +108,56 @@ def header(doc, Username):
    
 
 #summary
-def summary(doc):
+def summary(doc, sum):
     doc.append(resumeSection('Summary'))
-    doc.append("I am making this resume to make my life easyier to the world. I dont like to do extra work at all and im here to do the bare minumube when it comes to makeing this.jkskmss;lsm kmcdlkm")
+    doc.append(sum)
 
 
-#education
-def education(doc):
+#education part
+def education(doc, ed):
     doc.append(resumeSection("Education"))
-    doc.append(Command("textbf", "College",extra_arguments= Command("textbf",Command("hfill ", "city, state"))))
-    doc.append(Command("par"))
-    doc.append(Command("textit", "Bachilors of whatever",extra_arguments= Command("hfill ", "day/year")))
-    doc.append(Command("par"))
+    for college, map1 in ed.items():
+        for place, map2 in map1.items():
+            doc.append(Command("textbf", college,extra_arguments= Command("textbf",Command("hfill ", place))))
+            doc.append(Command("par"))
+            for degree, date in map2.items():
+                doc.append(Command("textit", degree,extra_arguments= Command("hfill ", date)))
+                doc.append(Command("par"))
 
 
 # profesonoal experence 
-def exp(doc):
+def experence(doc, exp):
     doc.append(resumeSection("Professonal Experence"))
-    doc.append(Command("textbf", "Job1", extra_arguments= Command("textbf",Command("hfill", "city,state"))))
-    doc.append(Command("par"))
-    doc.append(Command("textit","Job1 name", extra_arguments= Command("hfill", "date-date")))
-    with doc.create(Itemize()) as itemize:
-        itemize.add_item("the first item")
-        itemize.add_item("the second item")
-        itemize.add_item("the third etc")
+    for job, map1 in exp.items():
+        for place, map2 in map1.items():
+            doc.append(Command("textbf", job, extra_arguments= Command("textbf",Command("hfill", place))))
+            doc.append(Command("par"))
+            for title, map3 in map2.items():
+                for date, dutys in map3.items():
+                    doc.append(Command("textit",title, extra_arguments= Command("hfill", date)))
+                    with doc.create(Itemize()) as itemize:
+                        for i in range(len(dutys)):
+                            itemize.add_item(dutys[i])
      
         
 #key skills
-def keySkills(doc):
+def keySkills(doc, skills):
     doc.append(resumeSection("Key Skills"))
-    doc.append("key skill one, two, three, fror, five")
+    doc.append(skills)
         
         
  #certtification        
-def cert(doc):
+def certification(doc, cert):
     doc.append(resumeSection("Certification"))
     with doc.create(Itemize()) as itemize:
-        itemize.add_item(Command("textit","the first item", extra_arguments= Command("hfill", "date-date")))
+        for i in cert:
+            itemize.add_item(Command("textit",i, extra_arguments= Command("hfill",cert[i])))
         
-def other(doc, otherName):
+def other(doc, otherName, oth):
     doc.append(resumeSection(otherName))
     with doc.create(Itemize()) as itemize:
-        itemize.add_item(Command("textit","the first item", extra_arguments= Command("hfill", "date-date")))
+        for i in oth:
+            itemize.add_item(Command("textit",i, extra_arguments= Command("hfill", oth[i])))
         
         
 def main():
@@ -159,17 +167,25 @@ def main():
     
     #Vars from main file to be used
     doc = main.doc
-    Username = main.user
+    Username = main.name
+    loc = main.loc
+    sum = main.summary
+    ed = main.education
+    exp = main.exp 
+    skills = main.skills
+    cert = main.cert
+    otherName = main.otherName
+    oth = main.other
     
     #parts of the reusme.
     packages(doc)
     commands(doc)
-    header(doc, Username)
-    summary(doc)
-    education(doc)
-    exp(doc)
-    keySkills(doc)
-    cert(doc)
-    #other(doc, otherName)
+    header(doc, Username, loc)
+    summary(doc,sum)
+    education(doc, ed)
+    experence(doc, exp)
+    keySkills(doc, skills)
+    certification(doc, cert)
+    other(doc, otherName, oth)
         
     doc.generate_pdf('TestFile', clean_tex=False)
