@@ -4,7 +4,7 @@ from pylatex.utils import *
 from pylatex.package import *
 from pylatex._version import *
 from pylatex.basic import *
-import os.path
+import os
 
 #deletes test file
 if os.path.exists("TestFile.tex"):
@@ -32,17 +32,7 @@ class contactInfo(CommandBase):
 class resumeSection(CommandBase):
     _latex_name = 'resumesection'
     packages = [Package('indentfirst')]
- 
- 
-#Custon command linkedIn       
-class linkedIn(CommandBase):
-    _latex_name = 'linkedIn'
-        
-        
-#Custon command linkedIn       
-class github(CommandBase):
-    _latex_name = 'github'
-        
+    
     
 #Custom command list
 #all commands are global in the tex file
@@ -64,14 +54,6 @@ def commands(doc):
     #set set family default
     doc.preamble.append(UnsafeCommand('renewcommand', r"\familydefault", extra_arguments="\sfdefault"))
     
-    # github command
-    github = UnsafeCommand('newcommand', r'\github', extra_arguments=r"\textcolor{rgb:red,110;green,84;blue,148}{\faGithubSquare}")
-    doc.preamble.append(github)
-    
-    # linkedIn command
-    linkedIn = UnsafeCommand('newcommand', r'\linkedIn', extra_arguments= r"\textcolor{rgb:red,6;green,108;blue,170}{\faLinkedinSquare}")
-    doc.preamble.append(linkedIn)
-    
     # Section divider
     resumesection = UnsafeCommand('newcommand', r'\resumesection', options= 1, extra_arguments=r"\vspace{-0.5cm}\section*{\color{highlight}#1}\vspace{-0.2cm}\hrule\vspace{0.2cm}")
     doc.preamble.append(resumesection)
@@ -79,10 +61,6 @@ def commands(doc):
     # Define new command for contactInfo
     location = UnsafeCommand('newcommand', r'\location', options=1, extra_arguments=r"\begin{center}\vspace{-0.1cm}#1\vspace{-0.3cm}\end{center}")
     doc.preamble.append(location)
-    
-    # Define new command for contactInfo
-    contactInfo = UnsafeCommand('newcommand', r'\contactInfo', options=1, extra_arguments=r"\begin{center}\vspace{-0.1cm}#1\vspace{-0.3cm}\end{center}")
-    doc.preamble.append(contactInfo)
     
     # Define new command for Name
     name = UnsafeCommand('newcommand', r'\name', options=1, extra_arguments=r"\begin{center}\section*{\LARGE \color{highlight}#1}\vspace{-0.8cm}\end{center}")
@@ -97,14 +75,23 @@ def packages(doc):
 
 
 #header
-def header(doc, Username, loc):
+def header(doc, Username, loc, email, phone, linkedIn, otherContacts):
    doc.append(name(arguments=Arguments(Username)))
    doc.append(location(arguments=loc))
-   doc.append(contactInfo(arguments=Command("href","mailto:email@domain", extra_arguments=("youremail@email.com",
-                                                                                           " (123) 456-7890 ", 
-                                                                                           Command("href","https://www.linkedin.com/in/branden-hernandez-688365165/", 
-                                                                                                   extra_arguments="LinkedIn: branden-hernandez-688365165"), 
-                                                                                           Command("href","https://github.com/Bherna33", extra_arguments=" GitHub: Bherna33")))))
+   
+   with doc.create(Center()):
+       doc.append(Command("href","mailto:email@domain", extra_arguments=email))
+       doc.append(VerticalSpace("0.1cm"))
+       doc.append(phone)
+       doc.append(VerticalSpace("0.1cm"))
+       doc.append(Command("href","https://www.linkedin.com/in/" + linkedIn, extra_arguments="LinkedIn: " + linkedIn))
+       
+       for i in otherContacts:
+           if "github" in i:
+               doc.append(VerticalSpace("0.1cm"))
+               doc.append(Command("href","https://github.com/" + i, extra_arguments="GitHub: " + i))
+           doc.append(VerticalSpace("0.1cm"))
+           doc.append(i)
    
 
 #summary
@@ -169,6 +156,10 @@ def main():
     doc = main.doc
     Username = main.name
     loc = main.loc
+    email = main.email
+    phone = main.phone
+    linkedIn = main.linkedIn
+    otherContacts = main.otherContacts
     sum = main.summary
     ed = main.education
     exp = main.exp 
@@ -180,7 +171,7 @@ def main():
     #parts of the reusme.
     packages(doc)
     commands(doc)
-    header(doc, Username, loc)
+    header(doc, Username, loc, email, phone, linkedIn, otherContacts)
     summary(doc,sum)
     education(doc, ed)
     experence(doc, exp)
@@ -188,4 +179,5 @@ def main():
     certification(doc, cert)
     other(doc, otherName, oth)
         
-    doc.generate_pdf('TestFile', clean_tex=False)
+    doc.generate_tex('TestFile')
+    #os.system("pdfLaTex TestFile.tex")

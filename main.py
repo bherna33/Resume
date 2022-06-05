@@ -7,11 +7,16 @@ import os
 from Template import template1
 from pylatex import Document
 
+
 doc = Document(documentclass='article', document_options='11pt',geometry_options={"margin":"0.5in"})
 
 # contents for contant info
-name = "John Doe"
+name = "Johnnn Doe"
 loc = "city, state"
+email = ""
+phone = ""
+linkedIn = ""
+otherContacts = []
 
 # contents for summary
 summary = "I am a computer sciencetist that loves to code"
@@ -65,8 +70,11 @@ cert = {"latex": "2016", "Java": "2017"}
 otherName = "Personal projects"
 other = {"Chat bot": "2016", "to do list": "2017"}
 
+
 def temp1():
-    template1.header(doc,name, loc)
+
+    
+    template1.header(doc,name, loc, email, phone, linkedIn, otherContacts)
     template1.summary(doc, summary)
     template1.education(doc, education)
     template1.experence(doc, exp)
@@ -77,5 +85,5 @@ def temp1():
 
 
 if __name__ == '__main__':
-    
+  
     temp1()

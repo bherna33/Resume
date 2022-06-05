@@ -8,6 +8,7 @@
 \geometry{margin=0.5in}%
 \usepackage{xcolor}%
 \usepackage{hyperref}%
+\usepackage{ragged2e}%
 \usepackage{indentfirst}%
 %
 \usepackage{bbding}%
@@ -19,18 +20,21 @@
 \renewcommand\labelitemi{{-}}%
 \pagestyle{empty}%
 \renewcommand{\familydefault}{\sfdefault}%
-\newcommand{\github}{\textcolor{rgb:red,110;green,84;blue,148}{\faGithubSquare}}%
-\newcommand{\linkedIn}{\textcolor{rgb:red,6;green,108;blue,170}{\faLinkedinSquare}}%
 \newcommand{\resumesection}[1]{\vspace{-0.5cm}\section*{\color{highlight}#1}\vspace{-0.2cm}\hrule\vspace{0.2cm}}%
 \newcommand{\location}[1]{\begin{center}\vspace{-0.1cm}#1\vspace{-0.3cm}\end{center}}%
-\newcommand{\contactInfo}[1]{\begin{center}\vspace{-0.1cm}#1\vspace{-0.3cm}\end{center}}%
 \newcommand{\name}[1]{\begin{center}\section*{\LARGE \color{highlight}#1}\vspace{-0.8cm}\end{center}}%
 %
 \begin{document}%
 \normalsize%
-\name{John Doe}%
+\name{Johnnn Doe}%
 \location{city, state}%
-\contactInfo{\href{mailto:email@domain}{youremail@email.com}{ (123) 456{-}7890 }{\href{https://www.linkedin.com/in/branden{-}hernandez{-}688365165/}{LinkedIn: branden{-}hernandez{-}688365165}}{\href{https://github.com/Bherna33}{ GitHub: Bherna33}}}%
+\begin{center}%
+\href{mailto:email@domain}{}%
+\vspace*{0.1cm}%
+%
+\vspace*{0.1cm}%
+\href{https://www.linkedin.com/in/}{LinkedIn: }%
+\end{center}%
 \resumesection{Summary}%
 I am a computer sciencetist that loves to code%
 \resumesection{Education}%
