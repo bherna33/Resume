@@ -6,74 +6,44 @@ what they want on the resume.
 import os
 from Template import template1
 from pylatex import Document
+import json
 
-
+#read in json file of user data
+with open('Userdata.json', 'r') as jsonFile:
+        userdata = json.load(jsonFile)
+        
 doc = Document(documentclass='article', document_options='11pt',geometry_options={"margin":"0.5in"})
 
 # contents for contant info
-name = "Johnnn Doe"
-loc = "city, state"
-email = ""
-phone = ""
-linkedIn = ""
-otherContacts = []
+name = userdata[0]
+loc = userdata[1]
+email = userdata[2]
+phone = userdata[3]
+linkedIn = userdata[4]
+otherContacts = userdata[5]
 
 # contents for summary
-summary = "I am a computer sciencetist that loves to code"
+summary = userdata[6]
 
 # contents for education
-#hashmap{String: hashmap{String: hashmap{String: String}}}
-education = {
-    "University Near You":
-    {"city, state":
-        {"Bachlor of Science in Computer science":
-            "1/2022"}
-        },
-    "University Near you":
-        {"city, state":
-            {"Bachlors of buisness":
-                "2/2020"}
-            }
-        }
+education = userdata[7]
 
 # contents for job
-#hashmap{String : hashmap{String: hashmap{String: hashmap{String:Array[Strings]}}}}
-#hashmap{"job" : hashmap{"city, state": hashmap{"job name": hashmap{"date":Array[responsibilities]}}}}
-exp = {
-    "College of engerning" : 
-    {"city, state": 
-        {"Technical Assistant": 
-            {"july 2016- current":
-                ["Assistant director", "technical supprot", "mannanged and directed"]
-                }
-            }
-        },
-    "College of buisnness":
-        {"city, state":
-            {"inter assistant":
-                {"jan 2016- july 2016":
-                    ["built computers", "managed money", "file stuff"]
-                    }
-                }
-            }
-    }
+exp = userdata[8]
 
 # contents for key skills
-skills = "C++, Java, VSCode, Windows 10, Windows 7, Microsoft Office, CSS, HTML, JavaScript"
+skills = userdata[9]
 
 #contents for certifications
-#hashmap{String: String}
-cert = {"latex": "2016", "Java": "2017"}
+cert = userdata[10]
 
 #contents for other
-#hashmap{String: String}
-otherName = "Personal projects"
-other = {"Chat bot": "2016", "to do list": "2017"}
+otherName = userdata[11]
+other = userdata[12]
 
 
+#template 1 
 def temp1():
-
-    
     template1.header(doc,name, loc, email, phone, linkedIn, otherContacts)
     template1.summary(doc, summary)
     template1.education(doc, education)
@@ -81,7 +51,7 @@ def temp1():
     template1.keySkills(doc,skills)
     template1.certification(doc, cert)
     template1.other(doc, otherName, other)
-    template1.main()
+    doc.generate_tex('TestFile')
 
 
 if __name__ == '__main__':

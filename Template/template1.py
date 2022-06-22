@@ -33,7 +33,7 @@ class resumeSection(CommandBase):
     _latex_name = 'resumesection'
     packages = [Package('indentfirst')]
     
-    
+
 #Custom command list
 #all commands are global in the tex file
 def commands(doc):
@@ -76,22 +76,24 @@ def packages(doc):
 
 #header
 def header(doc, Username, loc, email, phone, linkedIn, otherContacts):
-   doc.append(name(arguments=Arguments(Username)))
-   doc.append(location(arguments=loc))
+    doc.append(name(arguments=Arguments(Username)))
+    doc.append(location(arguments=loc))
    
-   with doc.create(Center()):
-       doc.append(Command("href","mailto:email@domain", extra_arguments=email))
-       doc.append(VerticalSpace("0.1cm"))
-       doc.append(phone)
-       doc.append(VerticalSpace("0.1cm"))
-       doc.append(Command("href","https://www.linkedin.com/in/" + linkedIn, extra_arguments="LinkedIn: " + linkedIn))
+    with doc.create(Center()):
+        doc.append(Command("href","mailto:email@domain", extra_arguments=email))
+        doc.append(VerticalSpace("0.1cm"))
+        doc.append(phone)
+        doc.append(VerticalSpace("0.1cm"))
+        #TODO: revise this line. are they giving id or link
+        doc.append(Command("href","https://www.linkedin.com/in/" + linkedIn, extra_arguments="LinkedIn: " + linkedIn))
        
-       for i in otherContacts:
-           if "github" in i:
-               doc.append(VerticalSpace("0.1cm"))
-               doc.append(Command("href","https://github.com/" + i, extra_arguments="GitHub: " + i))
-           doc.append(VerticalSpace("0.1cm"))
-           doc.append(i)
+        for i in otherContacts:
+            if "github" in i:
+                #FIXME: revise this line. are they giving id or link
+                doc.append(VerticalSpace("0.1cm"))
+                doc.append(Command("href","https://github.com/" + i, extra_arguments="GitHub: " + i))
+            doc.append(VerticalSpace("0.1cm"))
+            doc.append(i)
    
 
 #summary
@@ -133,51 +135,17 @@ def keySkills(doc, skills):
     doc.append(skills)
         
         
- #certtification        
+#certtification        
 def certification(doc, cert):
     doc.append(resumeSection("Certification"))
     with doc.create(Itemize()) as itemize:
         for i in cert:
             itemize.add_item(Command("textit",i, extra_arguments= Command("hfill",cert[i])))
-        
+
+#other topics        
 def other(doc, otherName, oth):
     doc.append(resumeSection(otherName))
     with doc.create(Itemize()) as itemize:
         for i in oth:
             itemize.add_item(Command("textit",i, extra_arguments= Command("hfill", oth[i])))
         
-        
-def main():
-    
-    #imported main file so that the file can get the information from there.
-    import main
-    
-    #Vars from main file to be used
-    doc = main.doc
-    Username = main.name
-    loc = main.loc
-    email = main.email
-    phone = main.phone
-    linkedIn = main.linkedIn
-    otherContacts = main.otherContacts
-    sum = main.summary
-    ed = main.education
-    exp = main.exp 
-    skills = main.skills
-    cert = main.cert
-    otherName = main.otherName
-    oth = main.other
-    
-    #parts of the reusme.
-    packages(doc)
-    commands(doc)
-    header(doc, Username, loc, email, phone, linkedIn, otherContacts)
-    summary(doc,sum)
-    education(doc, ed)
-    experence(doc, exp)
-    keySkills(doc, skills)
-    certification(doc, cert)
-    other(doc, otherName, oth)
-        
-    doc.generate_tex('TestFile')
-    #os.system("pdfLaTex TestFile.tex")

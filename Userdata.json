@@ -1,0 +1,49 @@
+[
+    "branden",
+    "",
+    "",
+    "",
+    "",
+    [],
+    "",
+    {
+        "University Near You": {
+            "city, state": {
+                "Bachlor of Science in Computer science": "1/2022"
+            }
+        },
+        "University Near you": {
+            "city, state": {
+                "Bachlors of buisness": "2/2020"
+            }
+        }
+    },
+    {
+        "College of engerning": {
+            "city, state": {
+                "Technical Assistant": {
+                    "july 2016- current": [
+                        "Assistant director",
+                        "technical supprot",
+                        "mannanged and directed"
+                    ]
+                }
+            }
+        },
+        "College of buisnness": {
+            "city, state": {
+                "inter assistant": {
+                    "jan 2016- july 2016": [
+                        "built computers",
+                        "managed money",
+                        "file stuff"
+                    ]
+                }
+            }
+        }
+    },
+    "",
+    {},
+    "",
+    {}
+]
