@@ -6,9 +6,6 @@ from pylatex._version import *
 from pylatex.basic import *
 import os
 
-#deletes test file
-if os.path.exists("TestFile.tex"):
-    os.remove("TestFile.tex")
 
 #Custom command name
 class name(CommandBase):

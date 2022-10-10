@@ -1,49 +1,37 @@
 [
-    "branden",
-    "",
-    "",
-    "",
-    "",
+    "brande",
+    "Miami, Fl",
+    "Testemail@email.com",
+    "1234567890",
+    "bhernan637389",
     [],
-    "",
+    "this is a test to see if everything i great and dandy. once it is i can             continue with tis and make more progresss to ths document            i really dont know how to move forward with this, i might  ake a window to add the info to make            things erier. we will see.",
     {
-        "University Near You": {
-            "city, state": {
-                "Bachlor of Science in Computer science": "1/2022"
-            }
-        },
-        "University Near you": {
-            "city, state": {
-                "Bachlors of buisness": "2/2020"
+        "college": {
+            "state": {
+                "degree": "month/year"
             }
         }
     },
     {
-        "College of engerning": {
-            "city, state": {
-                "Technical Assistant": {
-                    "july 2016- current": [
-                        "Assistant director",
-                        "technical supprot",
-                        "mannanged and directed"
-                    ]
-                }
-            }
-        },
-        "College of buisnness": {
-            "city, state": {
-                "inter assistant": {
-                    "jan 2016- july 2016": [
-                        "built computers",
-                        "managed money",
-                        "file stuff"
+        "Job1": {
+            "city/state": {
+                "title1": {
+                    "month/year": [
+                        "duty1",
+                        "duty2",
+                        "duty3"
                     ]
                 }
             }
         }
     },
-    "",
-    {},
-    "",
-    {}
+    "key skill1, keyskill2, keyskills3, 4,5,6,7,8,9",
+    {
+        "certification 1": "month/year"
+    },
+    "Other Stuff",
+    {
+        "name": "month/year"
+    }
 ]
