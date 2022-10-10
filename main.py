@@ -8,11 +8,12 @@ from Template import template1
 from pylatex import Document
 import json
 
+from user import User
+
 #read in json file of user data
 with open('Userdata.json', 'r') as jsonFile:
         userdata = json.load(jsonFile)
         
-doc = Document(documentclass='article', document_options='11pt',geometry_options={"margin":"0.5in"})
 
 # contents for contant info
 name = userdata[0]
@@ -43,7 +44,10 @@ other = userdata[12]
 
 
 #template 1 
-def temp1():
+def temp1(file_name):
+    doc = Document(documentclass='article', document_options='11pt',geometry_options={"margin":"0.5in"})
+    template1.packages(doc)
+    template1.commands(doc)
     template1.header(doc,name, loc, email, phone, linkedIn, otherContacts)
     template1.summary(doc, summary)
     template1.education(doc, education)
@@ -51,9 +55,26 @@ def temp1():
     template1.keySkills(doc,skills)
     template1.certification(doc, cert)
     template1.other(doc, otherName, other)
-    doc.generate_tex('TestFile')
+    doc.generate_tex(file_name)
+    
+    #deletes test file
+
+    if os.path.exists(file_name):
+        os.remove(file_name)
+
+
+def temp2():
+    print("hi")
 
 
 if __name__ == '__main__':
-  
-    temp1()
+    User
+    resumenum = input("What resume would you pick?\n")
+    if resumenum == "1":
+        file_name = input("What would you like to name your resume?\n")
+        temp1(file_name)
+    if resumenum == "2":
+        temp2()
+    else:
+        print("I have not been created yet")
+    
