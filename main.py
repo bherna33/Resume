@@ -68,12 +68,12 @@ def temp2():
 
 
 if __name__ == '__main__':
-    User
     resumenum = input("What resume would you pick?\n")
     if resumenum == "1":
         file_name = input("What would you like to name your resume?\n")
         temp1(file_name)
-    if resumenum == "2":
+        User()
+    elif resumenum == "2":
         temp2()
     else:
         print("I have not been created yet")

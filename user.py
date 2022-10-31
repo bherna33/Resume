@@ -3,7 +3,7 @@ import json
 class User():
     def __init__(self):
         # contents for contant info
-        self.name = input("what is your name?")
+        self.name = ""
         self.loc = "Miami, Fl"
         self.email = "Testemail@email.com"
         self.phone = "1234567890"
@@ -59,14 +59,23 @@ class User():
         self.other = {name:date}
         return self.other
             
-        
-user = User()
-education = user.education("college", "state", "degree", "month/year")
-experence = user.experence("Job1", "city/state", "title1", "month/year", ["duty1", "duty2", "duty3"])
-certification = user.certifications("certification 1", "month/year")
-misc = user.misc("name", "month/year")
+def userClass():       
+    user = User()
+    user.name = input("Name?\n")
+    user.loc = input("location?\n")
+    user.email = input("Email?\n")
+    user.phone = input("phne?\n")
+    user.linkedIn = input("linkedin?\n")
+    oth = input("do you have any other?\n")
+    if oth == "yes":
+        user.other = input("other contacts?\n")
+    education = user.education("college", "state", "degree", "month/year")
+    experence = user.experence("Job1", "city/state", "title1", "month/year", ["duty1", "duty2", "duty3"])
+    certification = user.certifications("certification 1", "month/year")
+    misc = user.misc("name", "month/year")
 
 
-with open("Userdata.json", "w") as jsonfile:
+    with open("Userdata.json", "w") as jsonfile:
 
-    json.dump((user.name, user.loc,user.email,user.phone, user.linkedIn, user.otherContacts, user.summary, education, experence,user.skills, certification,user.misName,misc), jsonfile, indent=4)
+        json.dump((user.name, user.loc,user.email,user.phone, user.linkedIn, user.otherContacts, user.summary, education, experence,user.skills, certification,user.misName,misc), jsonfile, indent=4)
+userClass()
